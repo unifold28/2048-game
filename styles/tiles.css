@@ -1,0 +1,24 @@
+.tile{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: #f8f8f8;
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 24px;
+    color: #404040;
+}
+
+.tile-2{background-color: hsl(120, 75%, 75%);}
+.tile-4{background-color: hsl(135, 75%, 75%);}
+.tile-8{background-color: hsl(150, 75%, 75%);}
+.tile-16{background-color: hsl(165, 75%, 75%);}
+.tile-32{background-color: hsl(180, 75%, 75%);}
+.tile-64{background-color: hsl(195, 75%, 75%);}
+.tile-128{background-color: hsl(210, 75%, 75%);}
+.tile-256{background-color: hsl(225, 75%, 75%);}
+.tile-512{background-color: hsl(245, 75%, 75%);}
+.tile-1024{background-color: hsl(260, 75%, 75%);}
+.tile-2048{background-color: hsl(275, 75%, 75%);}
+.tile-super{background-color: hsl(290, 75%, 75%);}

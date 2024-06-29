@@ -1,0 +1,17 @@
+body{
+    margin: 0;
+}
+
+#grid{
+    width: 512px;
+    height: 512px;
+
+    margin: 128px auto 0 auto;
+    padding: 4px;
+
+    display: grid;
+    gap: 4px;
+    /* JS generaes grid template properties */
+
+    background-color: #f0f0f0;
+}
