@@ -79,6 +79,110 @@ class Grid{
         }
     };
 
+    // Get tile's coordinate based on given line direction, line coordinate and in-line index
+    // 0 - up, 1 - right, 2 - down, 3 - left
+    getInLineTile(direction, coordinate, index){
+        var coordinates = {};
+        switch(direction){
+            // Up (reverse the y coordinate)
+            case 0:
+                coordinates.x = coordinate;
+                coordinates.y = this.size - 1 - index;
+                break;
+            // Right
+            case 1:
+                coordinates.x = index;
+                coordinates.y = coordinate;
+                break;
+            // Down
+            case 2:
+                coordinates.x = coordinate;
+                coordinates.y = index;
+                break;
+            // Left (reverse the x coordinate)
+            case 3:
+                coordinates.x = this.size - 1 - index;
+                coordinates.y = coordinate;
+                break;
+        }
+        return coordinates;
+    };
+
+    // Get a line (a row or a column) as an array based on the direction given
+    getLine(direction, coordinate){
+        var line = [];
+        for(var i = 0; i < this.size; i++){
+            var coordinates = this.getInLineTile(direction, coordinate, i);
+            line[i] = this.getTile(coordinates);
+        }
+        return line;
+    };
+
+    // Set the line back into the grid
+    setLine(direction, coordinate, line){
+        for(var i = 0; i < this.size; i++){
+            var coordinates = this.getInLineTile(direction, coordinate, i);
+            this.setTile(coordinates, line[i]);
+        }
+    };
+
+    // Compress a given line (slide all 0s to the left and other values to the right)
+    // [2, 0, 2, 0] ---> [0, 0, 2, 2]
+    compressLine(line){
+        var compressedLine = [];
+        for(var i = 0; i < line.length; i++){
+            var value = line[i];
+            if(value == 0){
+                // Slide 0s to the left
+                compressedLine.unshift(0);
+            }else{
+                // Slide non-zero values to the right
+                compressedLine.push(value);
+            }
+        }
+        return compressedLine;
+    };
+
+    // Go throught the line and combine equal adjacent values
+    // [2, 2, 4, 0] ---> [4, 0, 4, 0]
+    mergeLine(line){
+        for(var i = 0; i < line.length - 1; i++){
+            if(line[i] == line[i + 1] && line[i] != 0){
+                line[i] = 2 * line[i];
+                line[i + 1] = 0;
+            }
+        }
+        return line;
+    };
+
+    // Check if a move in a given direction is available (if it changes the board)
+    isAvailableMove(direction){
+        for(var i = 0; i < this.size; i++){
+            var line = this.getLine(direction, i);
+            var lineAfter = line;
+            lineAfter = this.compressLine(lineAfter);
+            lineAfter = this.mergeLine(lineAfter);
+            for(var j = 0; j < line.length; j++){
+                if(lineAfter[j] != line[j]){
+                    return true;
+                }
+            }
+        }
+        return false;
+    };
+
+    // Move (slide) tiles in a given direction
+    // [2, 0, 2, 4] ---> [0, 0, 4, 4]
+    move(direction){
+        for(var i = 0; i < this.size; i++){
+            var line = this.getLine(direction, i);
+            line = this.compressLine(line);
+            line = this.mergeLine(line);
+            line = this.compressLine(line);
+            this.setLine(direction, i, line);
+        }
+    };
+
     // Test: showcase all tile values (empty, 2 - 2048, super) 
     showcaseTiles(){
         for(var y = 0; y < this.size; y++){
