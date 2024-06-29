@@ -9,7 +9,7 @@ class Game{
     // Separated from constructor for convenience
     setup(){
         // Test: showcase all tile values
-        this.grid.showcaseTiles();
+        this.grid.generateStartingTiles();
 
         this.html.update();
     };
