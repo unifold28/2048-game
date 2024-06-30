@@ -171,6 +171,28 @@ class Grid{
         return false;
     };
 
+    // Shorthand: check if the grid has any available moves
+    hasAvailableMoves(){
+        for(var i = 0; i < 4; i++){
+            if(this.isAvailableMove(i)){
+                return true;
+            }
+        }
+        return false;
+    };
+
+    // Check if the grid had a tile with a value >= 2048
+    hasWinningTile(){
+        for(var y = 0; y < this.size; y++){
+            for(var x = 0; x < this.size; x++){
+                if(this.getTile({x: x, y: y}) >= 2048){
+                    return true;
+                }
+            }
+        }
+        return false;
+    };
+
     // Move (slide) tiles in a given direction
     // [2, 0, 2, 4] ---> [0, 0, 4, 4]
     move(direction){
@@ -182,6 +204,17 @@ class Grid{
             this.setLine(direction, i, line);
         }
     };
+
+    // Clear the grid and generate starting tiles
+    reset(){
+        for(var y = 0; y < this.size; y++){
+            for(var x = 0; x < this.size; x++){
+                this.setTile({x: x, y: y}, 0);
+            }
+        }
+
+        this.generateStartingTiles();
+    }
 
     // Test: showcase all tile values (empty, 2 - 2048, super) 
     showcaseTiles(){

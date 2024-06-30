@@ -2,11 +2,20 @@ body{
     margin: 0;
 }
 
-#grid{
+#grid-container{
+    position: relative;
+
     width: 512px;
     height: 512px;
 
     margin: 128px auto 0 auto;
+    padding: 4px;
+}
+
+#grid{
+    width: 100%;
+    height: 100%;
+
     padding: 4px;
 
     display: grid;
@@ -14,4 +23,49 @@ body{
     /* JS generaes grid template properties */
 
     background-color: #f0f0f0;
+}
+
+#grid-overlay{
+    width: 100%;
+    height: 100%;
+
+    /* JS changes the display property between "none" and "grid" */
+    /* Initially hide the overlay */
+    display: none;
+    grid-template-rows: 1fr 1fr;
+    gap: 8px;
+
+    position: absolute;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    background-color: #f8f8f8c0;
+}
+
+#grid-overlay-message{
+    display: flex;
+    justify-content: center;
+    align-items: end;
+
+    font-size: 42px;
+    color: #404040;
+}
+
+#grid-overlay-button-container{
+    display: flex;
+    justify-content: center;
+    align-items: start;
+}
+
+#grid-overlay-button{
+    padding: 8px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 21px;
+    color: #f0f0f0;
+
+    background-color: #404040;
 }

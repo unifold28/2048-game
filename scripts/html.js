@@ -1,9 +1,13 @@
 class Html{
-    constructor(grid){
+    constructor(grid, state){
         this.grid = grid;
+        this.state = state;
 
         this.elements = {};
         this.elements.grid = document.getElementById("grid");
+        this.elements.gridOverlay = document.getElementById("grid-overlay");
+        this.elements.gridOverlayMessage = document.getElementById("grid-overlay-message");
+        this.elements.gridOverlayButton = document.getElementById("grid-overlay-button");
 
         this.setup();
     };
@@ -54,9 +58,9 @@ class Html{
 
     // Refresh all classes and innerHTMLs
     update(){
+        // Grid-related updates
         for(var y = 0; y < this.grid.size; y++){
             for(var x = 0; x < this.grid.size; x++){
-                // Grid-related updates
                 var tileElementId = this.getTileId({x: x, y: y});
                 var tileElement = document.getElementById(tileElementId);
 
@@ -72,5 +76,40 @@ class Html{
                 tileElement.innerHTML = tileElementText;
             }
         }
+
+        // State-related updates (in the overlay)
+        if(this.state.isOverlayed){
+            return;
+        }
+        if(this.state.isOver){
+            this.setGridOverlayText({message: "Game over!", button: "Try again"});
+        }
+        if(this.state.isWon && !this.state.isContinued){
+            this.setGridOverlayText({message: "You win!", button: "Continue"});
+        }
+    };
+
+    // Set the overlay's message and button text
+    setGridOverlayText(text){
+        this.elements.gridOverlayMessage.innerHTML = text.message;
+        this.elements.gridOverlayButton.innerHTML = text.button;
+
+        this.toggleGridOverlay(true);
+    };
+
+    // Hide or show the overlay
+    toggleGridOverlay(toggle){
+        this.state.isOverlayed = toggle;
+        if(!toggle){
+            this.elements.gridOverlay.style.display = "none";
+        }else{
+            this.elements.gridOverlay.style.display = "grid";
+        }
+    };
+
+    // Hide the overlay and update the html
+    reset(){
+        this.toggleGridOverlay(false);
+        this.update();
     };
 }

@@ -1,8 +1,9 @@
 class Game{
-    constructor(grid, html, inputs){
+    constructor(grid, html, inputs, state){
         this.grid = grid;
         this.html = html;
         this.inputs = inputs;
+        this.state = state;
 
         this.setup();
     };
@@ -10,20 +11,30 @@ class Game{
     // Separated from constructor for convenience
     setup(){
         var self = this;
+
         document.addEventListener("keydown", function(event){
             var key = event.code;
-            if(Object.hasOwn(self.inputs.keyBinds, key)){
-                self.onInput(key);
+            // Block the controls if the overlay is acive or the keh is not in the keybinds
+            if(self.state.isOverlayed || !self.inputs.isInKeyBinds(key)){
+                return;
             }
+            self.onKeyPress(key);
         });
 
-        this.grid.generateStartingTiles();
+        var buttonBinds = Object.keys(this.inputs.buttonBinds);
+        for(var i = 0; i < buttonBinds.length; i++){
+            var button = buttonBinds[i];
+            var buttonElement = document.getElementById(button);
+            buttonElement.addEventListener("click", function(event){
+                self.onButtonClick(button);
+            });
+        }
 
-        this.html.update();
+        this.reset();
     };
 
     // Called when a key in the key binds is pressed
-    onInput(key){
+    onKeyPress(key){
         var direction = this.inputs.keyBinds[key];
 
         // Check if the move will affect the grid
@@ -31,9 +42,39 @@ class Game{
             return;
         }
 
+        // Update the grid
         this.grid.move(direction);
         this.grid.generateTile();
 
+        // Update html
         this.html.update();
+    };
+
+    // Called when a button in the buttons is pressed
+    onButtonClick(button){
+        var bind = this.inputs.buttonBinds[button];
+        switch(bind){
+            case 0:
+                if(this.state.isOver){
+                    this.reset();
+                }
+                if(this.state.isWon){
+                    this.continue();
+                }
+                break;
+        }
+    };
+
+    // Return the game to its starting state
+    reset(){
+        this.grid.reset();
+        this.state.reset();
+        this.html.reset();
+    };
+
+    // Called after the game is won and "Continue" button is clicked
+    continue(){
+        this.state.isContinued = true;
+        this.html.toggleGridOverlay(false);
     };
 };
