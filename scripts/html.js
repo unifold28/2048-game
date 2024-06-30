@@ -1,15 +1,16 @@
 class Html{
     constructor(grid, state){
-        this.grid = grid;
-        this.state = state;
-
         this.elements = {};
         this.elements.grid = document.getElementById("grid");
         this.elements.gridOverlay = document.getElementById("grid-overlay");
         this.elements.gridOverlayMessage = document.getElementById("grid-overlay-message");
         this.elements.gridOverlayButton = document.getElementById("grid-overlay-button");
+    };
 
-        this.setup();
+    // Add other game components separately (to avoid declaration order issues)
+    addComponents(grid, state){
+        this.grid = grid;
+        this.state = state;
     };
 
     // Separated from constructor for convenience

@@ -1,7 +1,5 @@
 class Inputs{
-    constructor(state){
-        this.state = state;
-
+    constructor(){
         // Map keys to directions of movement
         // 0 - up, 1 - right, 2 - down, 3 - left
         this.keyBinds = {

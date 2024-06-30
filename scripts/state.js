@@ -1,11 +1,16 @@
 class State{
-    constructor(grid){
-        this.grid = grid;
-
+    constructor(){
         // Toggles after the game is won and "Continue" button is clicked
         this.isContinued = false;
         // Toggles on while the overlay is shown
         this.isOverlayed = false;
+        // Score
+        this.score = 0;
+    };
+
+    // Add other game components separately (to avoid declaration order issues)
+    addComponents(grid){
+        this.grid = grid;
     };
 
     // Game over: no available moves on the grid

@@ -5,6 +5,14 @@ class Game{
         this.inputs = inputs;
         this.state = state;
 
+        // Add other game components separately (to avoid declaration order issues)
+        this.grid.setup();
+
+        this.state.addComponents(this.grid);
+
+        this.html.addComponents(this.grid, this.state);
+        this.html.setup();
+
         this.setup();
     };
 
