@@ -146,10 +146,10 @@ class Grid{
     // Go throught the line and combine equal adjacent values
     // [2, 2, 4, 0] ---> [4, 0, 4, 0]
     mergeLine(line){
-        for(var i = 0; i < line.length - 1; i++){
-            if(line[i] == line[i + 1] && line[i] != 0){
-                line[i] = 2 * line[i];
-                line[i + 1] = 0;
+        for(var i = line.length - 1; i > 0; i--){
+            if(line[i] == line[i - 1] && line[i] != 0){
+                line[i - 1] = 2 * line[i];
+                line[i] = 0;
             }
         }
         return line;
