@@ -18,8 +18,10 @@ class Inputs{
         };
 
         // 0 - reset game after it is over / continue playing after it is won
+        // 1 - reset game
         this.buttonBinds = {
             "grid-overlay-button": 0,
+            "restart-button": 1,
         };
     };
 

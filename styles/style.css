@@ -3,7 +3,7 @@ body{
 }
 
 #game-container{
-    width: fit-content;
+    width: 520px;
     height: fit-content;
 
     margin: 64px auto 0 auto;

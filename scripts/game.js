@@ -74,6 +74,13 @@ class Game{
                     this.continue();
                 }
                 break;
+            case 1:
+                var result = confirm("Warning: all progress you made will be lost. Restart the game?");
+                if(!result){
+                    return;
+                }
+                this.reset();
+                break;
         }
     };
 
