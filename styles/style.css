@@ -1,72 +1,12 @@
 body{
     margin: 0;
+
+    background-color: #f0f0f0;
 }
 
 #game-container{
     width: 520px;
     height: fit-content;
 
-    margin: 64px auto 0 auto;
-}
-
-#grid-container{
-    position: relative;
-}
-
-#grid{
-    width: 512px;
-    height: 512px;
-
-    padding: 4px;
-
-    display: grid;
-    gap: 4px;
-    /* JS generaes grid template properties */
-
-    background-color: #f0f0f0;
-}
-
-#grid-overlay{
-    width: 100%;
-    height: 100%;
-
-    /* JS changes the display property between "none" and "grid" */
-    /* Initially hide the overlay */
-    display: none;
-    grid-template-rows: 1fr 1fr;
-    gap: 8px;
-
-    position: absolute;
-
-    font-family: Arial, Helvetica, sans-serif;
-
-    background-color: #f8f8f8c0;
-}
-
-#grid-overlay-message{
-    display: flex;
-    justify-content: center;
-    align-items: end;
-
-    font-size: 42px;
-    color: #404040;
-}
-
-#grid-overlay-button-container{
-    display: flex;
-    justify-content: center;
-    align-items: start;
-}
-
-#grid-overlay-button{
-    padding: 8px;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    font-size: 21px;
-    color: #f0f0f0;
-
-    background-color: #404040;
+    margin: 32px auto 0 auto;
 }

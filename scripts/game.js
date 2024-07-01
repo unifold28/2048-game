@@ -29,13 +29,17 @@ class Game{
             self.onKeyPress(key);
         });
 
-        var buttonBinds = Object.keys(this.inputs.buttonBinds);
-        for(var i = 0; i < buttonBinds.length; i++){
-            var button = buttonBinds[i];
+        // Because of variable hoisting adding the event listeners should be moved to a separate function
+        var addEventListeners = function(button){
             var buttonElement = document.getElementById(button);
             buttonElement.addEventListener("click", function(event){
                 self.onButtonClick(button);
             });
+        };
+        var buttonBinds = Object.keys(this.inputs.buttonBinds);
+        for(var i = 0; i < buttonBinds.length; i++){
+            var button = buttonBinds[i];
+            addEventListeners(button);
         }
 
         this.reset();
@@ -77,7 +81,7 @@ class Game{
             case 1:
                 var result = confirm("Warning: all progress you made will be lost. Restart the game?");
                 if(!result){
-                    return;
+                    break;
                 }
                 this.reset();
                 break;
