@@ -5,23 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>2048-game</title>
     <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/heading.css">
     <link rel="stylesheet" href="styles/tiles.css">
 </head>
 <body>
-    <div id="grid-container">
-        <div id="grid-overlay">
-            <div id="grid-overlay-message">
-                <!-- JS inserts message text here -->
-            </div>
-            <div id="grid-overlay-button-container">
-                <!-- JS sets onclick for #grid-overlay-button -->
-                <div id="grid-overlay-button">
-                    <!-- JS inserts button text here -->
+    <div id="game-container">
+        <div id="heading">
+            <div id="title-container">2048</div>
+            <div id="heading-right">
+                <div id="score-container">
+                    <div id="score-text">SCORE</div>
+                    <div id="score"></div>
                 </div>
             </div>
         </div>
-        <div id="grid">
-            <!-- JS generates tiles here -->
+
+        <div id="grid-container">
+            <div id="grid-overlay">
+                <div id="grid-overlay-message">
+                    <!-- JS inserts message text here -->
+                </div>
+                <div id="grid-overlay-button-container">
+                    <!-- JS sets onclick for #grid-overlay-button -->
+                    <div id="grid-overlay-button">
+                        <!-- JS inserts button text here -->
+                    </div>
+                </div>
+            </div>
+            <div id="grid">
+                <!-- JS generates tiles here -->
+            </div>
         </div>
     </div>
 

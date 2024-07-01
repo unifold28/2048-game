@@ -54,6 +54,10 @@ class Game{
         this.grid.move(direction);
         this.grid.generateTile();
 
+        // Update score
+        this.state.score += this.grid.scoreIncrement;
+        this.grid.scoreIncrement = 0;
+
         // Update html
         this.html.update();
     };

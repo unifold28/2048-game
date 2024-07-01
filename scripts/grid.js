@@ -4,6 +4,7 @@ class Grid{
 
         this.startingTiles = 2;
         this.tiles = [];
+        this.scoreIncrement = 0;
 
         this.setup();
     };
@@ -17,6 +18,11 @@ class Grid{
                 this.tiles[y][x] = 0;
             }
         }
+    };
+
+    // Add other game components separately (to avoid declaration order issues)
+    addComponents(state){
+        this.state = state;
     };
 
     // Shorthand: get tile's value
@@ -146,13 +152,15 @@ class Grid{
     // Go throught the line and combine equal adjacent values
     // [2, 2, 4, 0] ---> [4, 0, 4, 0]
     mergeLine(line){
+        var score = 0;
         for(var i = line.length - 1; i > 0; i--){
             if(line[i] == line[i - 1] && line[i] != 0){
                 line[i - 1] = 2 * line[i];
                 line[i] = 0;
+                score += line[i - 1];
             }
         }
-        return line;
+        return {line: line, score: score};
     };
 
     // Check if a move in a given direction is available (if it changes the board)
@@ -161,7 +169,7 @@ class Grid{
             var line = this.getLine(direction, i);
             var lineAfter = line;
             lineAfter = this.compressLine(lineAfter);
-            lineAfter = this.mergeLine(lineAfter);
+            lineAfter = this.mergeLine(lineAfter).line;
             for(var j = 0; j < line.length; j++){
                 if(lineAfter[j] != line[j]){
                     return true;
@@ -199,9 +207,11 @@ class Grid{
         for(var i = 0; i < this.size; i++){
             var line = this.getLine(direction, i);
             line = this.compressLine(line);
-            line = this.mergeLine(line);
+            var merged = this.mergeLine(line);
+            line = merged.line;
             line = this.compressLine(line);
             this.setLine(direction, i, line);
+            this.scoreIncrement += merged.score;
         }
     };
 
@@ -214,7 +224,7 @@ class Grid{
         }
 
         this.generateStartingTiles();
-    }
+    };
 
     // Test: showcase all tile values (empty, 2 - 2048, super) 
     showcaseTiles(){

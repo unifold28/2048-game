@@ -27,5 +27,6 @@ class State{
     reset(){
         this.isContinued = false;
         this.isOverlayed = false;
+        this.score = 0;
     };
 };

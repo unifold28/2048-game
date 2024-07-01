@@ -1,10 +1,11 @@
 class Html{
-    constructor(grid, state){
+    constructor(){
         this.elements = {};
         this.elements.grid = document.getElementById("grid");
         this.elements.gridOverlay = document.getElementById("grid-overlay");
         this.elements.gridOverlayMessage = document.getElementById("grid-overlay-message");
         this.elements.gridOverlayButton = document.getElementById("grid-overlay-button");
+        this.elements.score = document.getElementById("score");
     };
 
     // Add other game components separately (to avoid declaration order issues)
@@ -88,6 +89,8 @@ class Html{
         if(this.state.isWon && !this.state.isContinued){
             this.setGridOverlayText({message: "You win!", button: "Continue"});
         }
+        
+        this.elements.score.innerHTML = this.state.score;
     };
 
     // Set the overlay's message and button text
