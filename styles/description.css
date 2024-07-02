@@ -27,6 +27,8 @@
 #restart-button{
     padding: 8px 16px;
 
+    user-select: none;
+
     font-family: Arial, Helvetica, sans-serif;
     font-size: 21px;
     color: #f0f0f0;
