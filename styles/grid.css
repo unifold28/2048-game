@@ -60,4 +60,8 @@
     color: #f0f0f0;
 
     background-color: #404040;
+
+    border-radius: 4px;
+
+    cursor: pointer;
 }
